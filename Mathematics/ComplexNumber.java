@@ -40,7 +40,23 @@ public class ComplexNumber {
         //Double newRe = this.re * b.re - this.re * b.im;
         //Double newIm = this.im + b.im;
         //return new ComplexNumber(newRe, newIm);
+
+        //the princeton file does it this way
+        //I think they are using a negative to cancel out the i^2 that results from a.im * b.im
+        //but I don't know for certain yet
+        // Complex a = this;
+        // double real = a.re * b.re - a.im * b.im;
+        // double imag = a.re * b.im + a.im * b.re;
+        // return new Complex(real, imag);
     }
+
+    //invert the sign of the imaginary number to produce 
+    //the conjugate of the original complex number
+    //complex numbers multiplied by their conjugate result in a Real number
+    public ComplexNumber conjugate() {
+        return new ComplexNumber(this.re, this.im * -1);
+    }
+
 
     public static Double distance(ComplexNumber a, ComplexNumber b) {
         Double re;
