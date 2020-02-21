@@ -89,6 +89,11 @@ public class ComplexNumber {
 
         return m;
     }
+
+    //create a complex number from a string "2 + 3i" or "-20 - 7i"
+    public static ComplexNumber parse(String complexString) {
+        return new ComplexNumber(0d,0d);
+    }
     // public Double getRealPart() { return Double.parseDouble(realNumber); }
     // public Double getImaginaryPart() { return Double.parseDouble(imaginaryNumber.replaceAll("[^0-9?!\\.]","")); }
     // public static ComplexNumber Add(ComplexNumber cNum1, ComplexNumber cNum2) {
