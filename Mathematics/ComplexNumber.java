@@ -37,17 +37,19 @@ public class ComplexNumber {
     }
 
     public ComplexNumber multiply(ComplexNumber b) {
-        //Double newRe = this.re * b.re - this.re * b.im;
-        //Double newIm = this.im + b.im;
-        //return new ComplexNumber(newRe, newIm);
+        // to get the real number, multiply the real numbers then the imaginary, 
+        // but subtract to reverse the number sign of the product because the i^2 = -1
+        Double newReal = this.re * b.re - this.im * b.im; 
+        Double newI = this.re * b.im + this.im * b.re;
+        return new ComplexNumber(newReal, newI);
+    }
 
-        //the princeton file does it this way
-        //I think they are using a negative to cancel out the i^2 that results from a.im * b.im
-        //but I don't know for certain yet
-        // Complex a = this;
-        // double real = a.re * b.re - a.im * b.im;
-        // double imag = a.re * b.im + a.im * b.re;
-        // return new Complex(real, imag);
+    public ComplexNumber divide(ComplexNumber b) {
+        ComplexNumber conj = b.conjugate();
+        ComplexNumber n = this.multiply(conj);
+        ComplexNumber d = this.multiply(conj);
+
+        return new ComplexNumber(n.re/d.re, n.im/d.re);
     }
 
     //invert the sign of the imaginary number to produce 
@@ -56,7 +58,6 @@ public class ComplexNumber {
     public ComplexNumber conjugate() {
         return new ComplexNumber(this.re, this.im * -1);
     }
-
 
     public static Double distance(ComplexNumber a, ComplexNumber b) {
         Double re;
@@ -94,21 +95,13 @@ public class ComplexNumber {
     public static ComplexNumber parse(String complexString) {
         return new ComplexNumber(0d,0d);
     }
-    // public Double getRealPart() { return Double.parseDouble(realNumber); }
-    // public Double getImaginaryPart() { return Double.parseDouble(imaginaryNumber.replaceAll("[^0-9?!\\.]","")); }
-    // public static ComplexNumber Add(ComplexNumber cNum1, ComplexNumber cNum2) {
-    //     Double realPart = cNum1.getRealPart() + cNum2.getRealPart();
-    //     Double imaginaryPart = cNum.getImaginaryPart() + cNum2.getImaginaryPart();
-
-    //     ComplexNumber newCompNum = new ComplexNumber(realPart, imaginaryPart);
-    // }
 
     public static void main(String[] args) {
-        ComplexNumber a = new ComplexNumber(11d, 3d);
-        ComplexNumber b = new ComplexNumber(-5d, 9d);
-        var d = ComplexNumber.distance(a, b);
-        var m = ComplexNumber.midpoint(a, b);
-        System.out.println(d);
-        System.out.println(m.toString());
+        ComplexNumber a = new ComplexNumber(2d, 4d);
+        ComplexNumber b = new ComplexNumber(3d, -2d);
+        var quotient = a.divide(b);
+        var product = a.multiply(b);
+        System.out.println(quotient);
+        System.out.println(product);
     }
 }
