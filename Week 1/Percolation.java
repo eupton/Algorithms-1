@@ -9,31 +9,8 @@ public class Percolation {
     private final int virtualBottom;
     private final WeightedQuickUnionUF uf;
 
-    //private boolean debug = false;
-    //private HashMap<String,Double> time;
-
-    // private Stopwatch timer;
-    // private void startTimer(String key) {
-    //     if (this.debug)  {
-    //         this.timer = new Stopwatch();
-    //         if (!time.containsKey(key)) {
-    //             time.put(key, 0.0);
-    //         }
-    //     }        
-    // }
-    
-    // private void endTimer(String key) {
-    //     if (this.debug)  {
-    //         double t = time.get(key);
-    //         time.put(key, t + this.timer.elapsedTime());
-    //         this.timer = null;
-    //     }
-    // }
-
     // creates n-by-n grid, with all sites initially blocked
     public Percolation(int n) {
-        //time = new HashMap<String,Double>();
-        //startTimer("init");
         if (n <= 0) {
             throw new IllegalArgumentException("Parameter n must be greater than 0"); 
         }
@@ -43,12 +20,10 @@ public class Percolation {
         virtualTop = 0;
         virtualBottom = n*n+1;
         uf = new WeightedQuickUnionUF(n*n+2); //includes the 2 virtual sites (topSite is 0, bottomSite n*n+1)
-        //endTimer("init");
     }
 
     // opens the site (row, col) if it is not open already
     public void open(int row, int col) {
-        //startTimer("open");
         checkBounds(row, col);
 
         if (!isOpen(row, col)) {
@@ -67,8 +42,6 @@ public class Percolation {
             sites[row - 1][col - 1] = true;
             openCount++;
         }
-
-        //endTimer("open");
     }
 
     private void checkBounds(int row, int col) {
@@ -121,11 +94,8 @@ public class Percolation {
 
     // is the site (row, col) full/connected to the top?
     public boolean isFull(int row, int col) {
-        //startTimer("isFull");
         checkBounds(row, col);
-        boolean result = uf.find(getIndex(row, col)) == uf.find(virtualTop);
-        //endTimer("isFull");
-        return result;
+        return uf.find(getIndex(row, col)) == uf.find(virtualTop);
     }
 
     // returns the number of open sites
@@ -135,10 +105,7 @@ public class Percolation {
 
     // does the system percolate?
     public boolean percolates() {
-        //startTimer("percolates");
-        boolean percolates = uf.find(virtualTop) == uf.find(virtualBottom);
-        //endTimer("percolates");
-        return percolates;
+        return uf.find(virtualTop) == uf.find(virtualBottom);
     }
 
     private int getIndex(int row, int col) {
