@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 import edu.princeton.cs.algs4.StdRandom;
 import edu.princeton.cs.algs4.StdStats;
 
@@ -28,7 +26,7 @@ public class PercolationStats {
                 int col = StdRandom.uniform(1, n+1);
                 perc.open(row, col);
             }
-            double m = perc.numberOfOpenSites() / n;
+            double m = perc.numberOfOpenSites();
             trials[i] = m;
         }
 
@@ -101,14 +99,14 @@ public class PercolationStats {
         if (args.length == 2) {
             n =Integer.parseInt(args[0]);
             t = Integer.parseInt(args[1]);
-        } else {
-            Scanner scanner = new Scanner(System.in);
-            System.out.println("Enter a grid size");
-            n = scanner.nextInt();
-            System.out.println("Enter number of trials to run");
-            t = scanner.nextInt();
-            scanner.close();
-        }
+        } //else {
+        //     Scanner scanner = new Scanner(System.in);
+        //     System.out.println("Enter a grid size");
+        //     n = scanner.nextInt();
+        //     System.out.println("Enter number of trials to run");
+        //     t = scanner.nextInt();
+        //     scanner.close();
+        // }
 
         var percStats = new PercolationStats(n, t);
         System.out.println("mean                    = " + percStats.mean());
