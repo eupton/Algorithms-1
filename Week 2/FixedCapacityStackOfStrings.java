@@ -1,9 +1,8 @@
-public class FixedCapacityStackOfString
-{
+public class FixedCapacityStackOfStrings {
     private String[] s;
     private int N = 0;
 
-    public FixedCapacityStackOfString(int capacity)
+    public FixedCapacityStackOfStrings(int capacity)
     {
         s = new String[capacity];
     }
